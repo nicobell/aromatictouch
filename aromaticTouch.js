@@ -40,7 +40,7 @@ const ShowWineNumberIntentHandler = {
                         spotid: parseInt(spot)
                     },
                     ExpressionAttributeValues: {
-                        ':winetoshow': wine
+                        ':winetoshow': parseInt(wine)
                     },
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
@@ -57,7 +57,7 @@ const ShowWineNumberIntentHandler = {
                         spotid: 1
                     },
                     ExpressionAttributeValues: {
-                        ':winetoshow': wine
+                        ':winetoshow': parseInt(wine)
                     },
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
