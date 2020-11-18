@@ -133,7 +133,7 @@ const ResetAllWinesHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWines';
     },
     async handle(handlerInput) {
-        const speechText = 'Closing all spots';
+        var speechText = '';
 
         for(var spot = 1; spot++; spot<6) {
             try {
@@ -143,13 +143,14 @@ const ResetAllWinesHandler = {
                         spotid: spot
                     },
                     ExpressionAttributeValues: {
-                        ':winetoclose': 0
+                        ':winetoclose': 0,
                     },
-                    UpdateExpression: "set wineid = :spottoclose"
+                    UpdateExpression: "set wineid = :winetoclose",
                 }).promise();
+                speechText = 'Closing all spots';
 
             } catch (err) {
-                speechText = 'Error while closing all spots'
+                speechText = 'Error while closing all spots. Message: ' + err.message;
             };
         }
 
