@@ -134,21 +134,23 @@ const ResetAllWinesHandler = {
     },
     async handle(handlerInput) {
         var speechText = '';
+        var spot = 1;
 
         try {
-            //for(var spot = 1; spot++; spot<6) {
-                let data1 = await ddb.update({
+            for(var spot = 1; spot++; spot<6) {
+                await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: 1
+                        spotid: spot
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0,
                     },
                     UpdateExpression: "set wineid = :winetoclose",
                 }).promise();
+            }
 
-                let data2 = await ddb.update({
+                /*let data2 = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
                         spotid: 2
@@ -201,7 +203,7 @@ const ResetAllWinesHandler = {
                         ':winetoclose': 0,
                     },
                     UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+                }).promise();*/
             //}
             speechText = 'Closing all spots';
 
