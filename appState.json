@@ -1,0 +1,96 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "794f855c-a83c-4e70-9380-f406a9bfde2f": {
+        "id": "794f855c-a83c-4e70-9380-f406a9bfde2f",
+        "parent": null,
+        "name": "aromaticTouch.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "aromaticTouch.js",
+        "cursor": {
+          "lineNumber": 27,
+          "column": 104
+        },
+        "config": {
+          "runtime": "nodejs10.x",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": [],
+          "name": "aromaticTouch"
+        },
+        "triggers": [
+          {
+            "resourceName": "alexaSK32b05b5d77f5464a9ed9bcfae0adacc0",
+            "config": {}
+          }
+        ],
+        "lastUpdated": 1605692435114
+      }
+    },
+    "openFiles": [
+      "794f855c-a83c-4e70-9380-f406a9bfde2f"
+    ],
+    "currentFileId": "794f855c-a83c-4e70-9380-f406a9bfde2f",
+    "resources": {
+      "alexaSK32b05b5d77f5464a9ed9bcfae0adacc0": {
+        "name": "alexaSK32b05b5d77f5464a9ed9bcfae0adacc0",
+        "type": "ALEXA",
+        "config": {
+          "type": 1,
+          "verifiedID": true,
+          "skillID": "amzn1.ask.skill.32b05b5d-77f5-464a-9ed9-bcfae0adacc0",
+          "applicationID": ""
+        }
+      }
+    },
+    "customTemplate": {
+      "syntax": "JSON",
+      "overrideDefault": false,
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {
+        "ask-sdk": {
+          "name": "ask-sdk",
+          "language": "nodejs",
+          "version": "2.7.0",
+          "dev": false,
+          "notRemovable": false
+        }
+      }
+    }
+  },
+  "PROJECT_META": {
+    "sigmaVersion": "1.4.4.1",
+    "projectName": "aromaticTouch",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "language": "nodejs",
+    "platformRegions": {},
+    "lastSave": 1605693091405
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "aromatictouch",
+      "url": "https://github.com/nicobell/aromatictouch"
+    }
+  }
+}
