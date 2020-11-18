@@ -45,7 +45,7 @@ const ShowWineNumberIntentHandler = {
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
-                speechText = 'Error while showing wine in spot x.'
+                speechText = 'Error while showing wine in spot x. Message: ' + err.message
             };
 
         } else {
@@ -62,7 +62,7 @@ const ShowWineNumberIntentHandler = {
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
-                speechText = 'Error while showing wine in spot 1.'
+                speechText = 'Error while showing wine in spot 1. Message: ' + err.message
             };
         }
 
@@ -97,7 +97,7 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error whiel closing spot x.'
+                speechText = 'Error whiel closing spot x. Message: ' + err.message
             };
 
         } else {
@@ -115,7 +115,7 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error whiel closing spot 1.'
+                speechText = 'Error whiel closing spot 1. Message: ' + err.message
             };
 
         }
