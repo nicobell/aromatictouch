@@ -27,7 +27,47 @@ const ShowWineNumberIntentHandler = {
         const wine = Alexa.getSlotValue(handlerInput.requestEnvelope, 'number');
         const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
 
-        const speechText = 'Chosen wine ' + wine + ' in spot ' + spot;
+        var speechText = ''
+        if (spot != undefined)
+            speechText = 'Showing wine ' + wine;
+        else
+            speechText = 'Showing wine ' + wine + ' in spot ' + spot;
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withShouldEndSession(false)
+            .getResponse();
+    }
+};
+
+const ResetWineNumberIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'ResetWineNumberIntent';
+    },
+    handle(handlerInput) {
+        const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
+
+        var speechText = ''
+        if (spot != undefined)
+            speechText = 'Closing spot 1.';
+        else
+            speechText = 'Closing spot ' + spot + '.';
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withShouldEndSession(false)
+            .getResponse();
+    }
+};
+
+const ResetAllWinesHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWines';
+    },
+    handle(handlerInput) {
+        const speechText = 'Closing all spots.';
         
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -89,7 +129,9 @@ exports.handler = async function (event, context) {
                 CancelAndStopIntentHandler,
                 HelpIntentHandler,
                 LaunchRequestHandler,
-                ShowWineNumberIntentHandler
+                ShowWineNumberIntentHandler,
+                ResetWineNumberIntentHandler,
+                ResetAllWinesHandler
             ).create();
     }
 
