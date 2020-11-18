@@ -32,7 +32,7 @@ const ShowWineNumberIntentHandler = {
         var speechText = ''
 
         if (spot != undefined) {
-            speechText = 'Showing wine ' + wine;
+            speechText = 'Showing wine ' + wine + ' in spot ' + spot;
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -45,7 +45,7 @@ const ShowWineNumberIntentHandler = {
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
-                speechText = 'Error while showing wine in spot '+spot+'. Message: ' + err.message
+                speechText = 'Error while showing wine in spot ' + spot + '. Message: ' + err.message
             };
 
         } else {
@@ -83,7 +83,7 @@ const ResetWineNumberIntentHandler = {
 
         var speechText = ''
         if (spot != undefined) {
-            speechText = 'Closing spot 1.';
+            speechText = 'Closing spot 1';
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -97,11 +97,11 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error whiel closing spot '+spot+'. Message: ' + err.message
+                speechText = 'Error while closing spot ' + spot + '. Message: ' + err.message
             };
 
         } else {
-            speechText = 'Closing spot ' + spot + '.';
+            speechText = 'Closing spot ' + spot;
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -115,7 +115,7 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error whiel closing spot 1. Message: ' + err.message
+                speechText = 'Error while closing spot 1. Message: ' + err.message
             };
 
         }
@@ -132,8 +132,26 @@ const ResetAllWinesHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWines';
     },
-    handle(handlerInput) {
-        const speechText = 'Closing all spots.';
+    async handle(handlerInput) {
+        const speechText = 'Closing all spots';
+
+        for(var spot = 1; spot++; spot<6) 
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: spot
+                    },
+                    ExpressionAttributeValues: {
+                        ':spottoclose': spot
+                    },
+                    UpdateExpression: "set wineid = :spottoclose"
+                }).promise();
+
+            } catch (err) {
+                speechText = 'Error while colsing all spots'
+            };
+
 
         return handlerInput.responseBuilder
             .speak(speechText)
