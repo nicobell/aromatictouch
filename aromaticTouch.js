@@ -132,12 +132,12 @@ const ResetAllWinesHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWines';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
         var speechText = '';
 
         try {
             for(var spot = 1; spot++; spot<6) {
-                let data = await ddb.update({
+                let data = ddb.update({
                     TableName: "AromaticWines",
                     Key: {
                         spotid: spot
