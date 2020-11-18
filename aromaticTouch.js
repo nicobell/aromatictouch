@@ -18,6 +18,24 @@ const LaunchRequestHandler = {
     }
 };
 
+const ShowWineNumberIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'ShowWineNumberIntent';
+    },
+    handle(handlerInput) {
+        const wine = Alexa.getSlotValue(handlerInput.requestEnvelope, 'number');
+        const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
+
+        const speechText = 'Chosen wine ' + wine + ' in spot ' + spot;
+        
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withShouldEndSession(false)
+            .getResponse();
+    }
+};
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -70,7 +88,8 @@ exports.handler = async function (event, context) {
             .addRequestHandlers(
                 CancelAndStopIntentHandler,
                 HelpIntentHandler,
-                LaunchRequestHandler
+                LaunchRequestHandler,
+                ShowWineNumberIntentHandler
             ).create();
     }
 
