@@ -37,7 +37,7 @@ const ShowWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: spot
+                        spotid: parseInt(spot)
                     },
                     ExpressionAttributeValues: {
                         ':winetoshow': wine
@@ -88,7 +88,7 @@ const ResetWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: spot
+                        spotid: parseInt(spot)
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0
