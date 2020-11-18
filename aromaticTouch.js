@@ -37,7 +37,7 @@ const ShowWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        'spotid': spot
+                        spotid: spot
                     },
                     ExpressionAttributeValues: {
                         ':winetoshow': wine
@@ -45,7 +45,7 @@ const ShowWineNumberIntentHandler = {
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
-                speechText = 'Error while showing wine in spot x. Message: ' + err.message
+                speechText = 'Error while showing wine in spot '+spot+'. Message: ' + err.message
             };
 
         } else {
@@ -54,7 +54,7 @@ const ShowWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        'spotid': 1
+                        spotid: 1
                     },
                     ExpressionAttributeValues: {
                         ':winetoshow': wine
@@ -88,7 +88,7 @@ const ResetWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        'spotid': spot
+                        spotid: spot
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0
@@ -97,7 +97,7 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error whiel closing spot x. Message: ' + err.message
+                speechText = 'Error whiel closing spot '+spot+'. Message: ' + err.message
             };
 
         } else {
@@ -106,7 +106,7 @@ const ResetWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        'spotid': 1
+                        spotid: 1
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0
@@ -148,7 +148,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Chooose a wine to explore! Try to say: Show me wine number 1 in spot 1.' +
+        const speakOutput = 'Chooose a wine to explore! Try to say: Show me wine number 1 in spot 1. ' +
             'If you do not request a spot, the first will be default.';
 
         return handlerInput.responseBuilder
