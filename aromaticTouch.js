@@ -132,22 +132,77 @@ const ResetAllWinesHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWines';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         var speechText = '';
 
         try {
-            for(var spot = 1; spot++; spot<6) {
-                let data = ddb.update({
+            //for(var spot = 1; spot++; spot<6) {
+                let data1 = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: spot
+                        spotid: 1
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0,
                     },
                     UpdateExpression: "set wineid = :winetoclose",
                 }).promise();
-            }
+
+                let data2 = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 2
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0,
+                    },
+                    UpdateExpression: "set wineid = :winetoclose",
+                }).promise();
+
+                let data3 = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 3
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0,
+                    },
+                    UpdateExpression: "set wineid = :winetoclose",
+                }).promise();
+
+                let data4 = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 4
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0,
+                    },
+                    UpdateExpression: "set wineid = :winetoclose",
+                }).promise();
+
+                let data5 = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 5
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0,
+                    },
+                    UpdateExpression: "set wineid = :winetoclose",
+                }).promise();
+
+                let data6 = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 6
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0,
+                    },
+                    UpdateExpression: "set wineid = :winetoclose",
+                }).promise();
+            //}
             speechText = 'Closing all spots';
 
         } catch (err) {
