@@ -37,12 +37,12 @@ const ShowWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: spot
+                        'spotid': spot
                     },
                     ExpressionAttributeValues: {
                         ':winetoshow': wine
                     },
-                    UpdateExpression: "set #wineid = :winetoshow"
+                    UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
                 speechText = 'Error while showing wine in spot x.'
@@ -54,12 +54,12 @@ const ShowWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: 1
+                        'spotid': 1
                     },
                     ExpressionAttributeValues: {
                         ':winetoshow': wine
                     },
-                    UpdateExpression: "set #wineid = :winetoshow"
+                    UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
                 speechText = 'Error while showing wine in spot 1.'
@@ -88,12 +88,12 @@ const ResetWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: spot
+                        'spotid': spot
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0
                     },
-                    UpdateExpression: "set #wineid = :winetoclose"
+                    UpdateExpression: "set wineid = :winetoclose"
                 }).promise();
 
             } catch (err) {
@@ -106,12 +106,12 @@ const ResetWineNumberIntentHandler = {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
                     Key: {
-                        spotid: 1
+                        'spotid': 1
                     },
                     ExpressionAttributeValues: {
                         ':winetoclose': 0
                     },
-                    UpdateExpression: "set #wineid = :winetoclose"
+                    UpdateExpression: "set wineid = :winetoclose"
                 }).promise();
 
             } catch (err) {
