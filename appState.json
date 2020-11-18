@@ -11,8 +11,8 @@
         "isRemovable": true,
         "filePath": "aromaticTouch.js",
         "cursor": {
-          "lineNumber": 71,
-          "column": 9
+          "lineNumber": 104,
+          "column": 55
         },
         "config": {
           "runtime": "nodejs10.x",
@@ -45,6 +45,25 @@
           "skillID": "amzn1.ask.skill.32b05b5d-77f5-464a-9ed9-bcfae0adacc0",
           "applicationID": ""
         }
+      },
+      "ddbAromaticWines": {
+        "name": "ddbAromaticWines",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 1,
+          "table": {
+            "arn": "arn:aws:dynamodb:us-east-1:001122388545:table/AromaticWines",
+            "name": "AromaticWines",
+            "partitionKey": "spotid",
+            "partitionKeyType": "N",
+            "hasSortKey": false,
+            "sortKey": "",
+            "sortKeyType": "",
+            "payPerRequest": true,
+            "mode": 1,
+            "secondaryIndexes": {}
+          }
+        }
       }
     },
     "customTemplate": {
@@ -71,6 +90,13 @@
           "version": "2.7.0",
           "dev": false,
           "notRemovable": false
+        },
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "language": "nodejs",
+          "version": "2.644.0",
+          "dev": true,
+          "notRemovable": false
         }
       }
     }
@@ -84,7 +110,7 @@
     "platform": "AWS",
     "language": "nodejs",
     "platformRegions": {},
-    "lastSave": 1605695810086
+    "lastSave": 1605696864225
   },
   "VCS_STATE": {
     "provider": "GitHub",

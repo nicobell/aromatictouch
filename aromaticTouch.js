@@ -1,3 +1,5 @@
+const AWS = require('aws-sdk');
+const ddb = new AWS.DynamoDB.DocumentClient();
 const Alexa = require('ask-sdk');
 
 exports.handler = async (event) => {
@@ -23,15 +25,46 @@ const ShowWineNumberIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'ShowWineNumberIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         const wine = Alexa.getSlotValue(handlerInput.requestEnvelope, 'number');
         const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
 
         var speechText = ''
-        if (spot != undefined)
+
+        if (spot != undefined) {
             speechText = 'Showing wine ' + wine;
-        else
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: spot
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoshow': wine
+                    },
+                    UpdateExpression: "set #wineid = :winetoshow"
+                }).promise();
+            } catch (err) {
+                speechText = 'Error while showing wine in spot x.'
+            };
+
+        } else {
             speechText = 'Showing wine ' + wine + ' in spot ' + spot;
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 1
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoshow': wine
+                    },
+                    UpdateExpression: "set #wineid = :winetoshow"
+                }).promise();
+            } catch (err) {
+                speechText = 'Error while showing wine in spot 1.'
+            };
+        }
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -45,14 +78,47 @@ const ResetWineNumberIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'ResetWineNumberIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
 
         var speechText = ''
-        if (spot != undefined)
+        if (spot != undefined) {
             speechText = 'Closing spot 1.';
-        else
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: spot
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0
+                    },
+                    UpdateExpression: "set #wineid = :winetoclose"
+                }).promise();
+
+            } catch (err) {
+                speechText = 'Error whiel closing spot x.'
+            };
+
+        } else {
             speechText = 'Closing spot ' + spot + '.';
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 1
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoclose': 0
+                    },
+                    UpdateExpression: "set #wineid = :winetoclose"
+                }).promise();
+
+            } catch (err) {
+                speechText = 'Error whiel closing spot 1.'
+            };
+
+        }
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -68,7 +134,7 @@ const ResetAllWinesHandler = {
     },
     handle(handlerInput) {
         const speechText = 'Closing all spots.';
-        
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .withShouldEndSession(false)

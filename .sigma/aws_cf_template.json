@@ -80,7 +80,24 @@
               }
             }
           ]
-        }
+        },
+        "Policies": [
+          {
+            "PolicyName": "aromaticTouchPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:UpdateItem"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:001122388545:table/AromaticWines"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     "alexaSK32b05b5d77f5aromaticTouchPermission": {
