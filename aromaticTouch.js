@@ -149,7 +149,7 @@ const ResetAllWinesHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error while colsing all spots'
+                speechText = 'Error while closing all spots'
             };
 
 
