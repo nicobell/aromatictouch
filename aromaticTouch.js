@@ -205,8 +205,9 @@ const ResetAllWinesIntentHandler = {
                 },
                 ExpressionAttributeValues: {
                     ':winetoclose': 0,
+                    ':wineclosed': ""
                 },
-                UpdateExpression: "set wineid = :winetoclose",
+                UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed",
             }).promise();
             //}
 
@@ -217,8 +218,9 @@ const ResetAllWinesIntentHandler = {
                 },
                 ExpressionAttributeValues: {
                     ':winetoclose': 0,
+                    ':wineclosed': ""
                 },
-                UpdateExpression: "set wineid = :winetoclose",
+                UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed",
             }).promise();
 
             let data3 = await ddb.update({
@@ -228,8 +230,9 @@ const ResetAllWinesIntentHandler = {
                 },
                 ExpressionAttributeValues: {
                     ':winetoclose': 0,
+                    ':wineclosed': ""
                 },
-                UpdateExpression: "set wineid = :winetoclose",
+                UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed",
             }).promise();
 
             let data4 = await ddb.update({
@@ -239,8 +242,9 @@ const ResetAllWinesIntentHandler = {
                 },
                 ExpressionAttributeValues: {
                     ':winetoclose': 0,
+                    ':wineclosed': ""
                 },
-                UpdateExpression: "set wineid = :winetoclose",
+                UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed",
             }).promise();
 
             let data5 = await ddb.update({
@@ -250,8 +254,9 @@ const ResetAllWinesIntentHandler = {
                 },
                 ExpressionAttributeValues: {
                     ':winetoclose': 0,
+                    ':wineclosed': ""
                 },
-                UpdateExpression: "set wineid = :winetoclose",
+                UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed",
             }).promise();
 
             let data6 = await ddb.update({
@@ -261,8 +266,9 @@ const ResetAllWinesIntentHandler = {
                 },
                 ExpressionAttributeValues: {
                     ':winetoclose': 0,
+                    ':wineclosed': ""
                 },
-                UpdateExpression: "set wineid = :winetoclose",
+                UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed",
             }).promise();
             //}
             speechText = 'Ritorno alla home';
