@@ -79,8 +79,11 @@ const ShowWineNameIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'ShowWineNameIntent';
     },
     async handle(handlerInput) {
-        const name = Alexa.getSlotValue(handlerInput.requestEnvelope, 'name');
+        var name = Alexa.getSlotValue(handlerInput.requestEnvelope, 'name');
         const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
+
+        if(name==undefined)
+            name = Alexa.getSlotValue(handlerInput.requestEnvelope, 'nome');
 
         var speechText = '';
 
