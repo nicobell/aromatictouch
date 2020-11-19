@@ -40,9 +40,10 @@ const ShowWineNumberIntentHandler = {
                         spotid: parseInt(spot)
                     },
                     ExpressionAttributeValues: {
-                        ':winetoshow': parseInt(wine)
+                        ':winetoshow': parseInt(wine),
+                        ':wineclosed': ""
                     },
-                    UpdateExpression: "set wineid = :winetoshow"
+                    UpdateExpression: "set wineid = :winetoshow, winename = :wineclosed"
                 }).promise();
             } catch (err) {
                 speechText = 'Errore in apertura del vino in posizione ' + spot + '. Messaggio: ' + err.message
@@ -57,9 +58,10 @@ const ShowWineNumberIntentHandler = {
                         spotid: 1
                     },
                     ExpressionAttributeValues: {
-                        ':winetoshow': parseInt(wine)
+                        ':winetoshow': parseInt(wine),
+                        ':wineclosed': ""
                     },
-                    UpdateExpression: "set wineid = :winetoshow"
+                    UpdateExpression: "set wineid = :winetoshow, winename = :wineclosed"
                 }).promise();
             } catch (err) {
                 speechText = 'Errore in apertura del vino in posizione 1. Messaggio: ' + err.message
@@ -97,9 +99,10 @@ const ShowWineNameIntentHandler = {
                         spotid: parseInt(spot)
                     },
                     ExpressionAttributeValues: {
-                        ':winetoshow': name
+                        ':winetoshow': name,
+                        ':wineclosed': 0
                     },
-                    UpdateExpression: "set winename = :winetoshow"
+                    UpdateExpression: "set winename = :winetoshow, wineid = :wineclosed"
                 }).promise();
             } catch (err) {
                 speechText = 'Errore in apertura del vino in posizione ' + spot + '. Messaggio: ' + err.message
@@ -115,9 +118,10 @@ const ShowWineNameIntentHandler = {
                         spotid: 1
                     },
                     ExpressionAttributeValues: {
-                        ':winetoshow': name
+                        ':winetoshow': name,
+                        ':wineclosed': 0
                     },
-                    UpdateExpression: "set winename = :winetoshow"
+                    UpdateExpression: "set winename = :winetoshow, wineid = :wineclosed"
                 }).promise();
             } catch (err) {
                 speechText = 'Errore in apertura del vino in posizione ' + spot + '. Messaggio: ' + err.message
