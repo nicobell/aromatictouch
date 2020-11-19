@@ -12,7 +12,7 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = 'Welcome to Aromatic Touch!';
+        const speechText = 'Benvenuto in Aromatic Touch!';
         return handlerInput.responseBuilder
             .speak(speechText)
             .withShouldEndSession(false)
@@ -32,7 +32,7 @@ const ShowWineNumberIntentHandler = {
         var speechText = ''
 
         if (spot != undefined) {
-            speechText = 'Showing wine ' + wine + ' in spot ' + spot;
+            speechText = 'Vino numero ' + wine + ' in posizione ' + spot;
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -45,11 +45,11 @@ const ShowWineNumberIntentHandler = {
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
-                speechText = 'Error while showing wine in spot ' + spot + '. Message: ' + err.message
+                speechText = 'Errore in apertura del vino in posizione ' + spot + '. Messaggio: ' + err.message
             };
 
         } else {
-            speechText = 'Showing wine ' + wine + ' in spot ' + spot;
+            speechText = 'Vino numero ' + wine + ' in posizione 1';
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -62,7 +62,7 @@ const ShowWineNumberIntentHandler = {
                     UpdateExpression: "set wineid = :winetoshow"
                 }).promise();
             } catch (err) {
-                speechText = 'Error while showing wine in spot 1. Message: ' + err.message
+                speechText = 'Errore in apertura del vino in posizione 1. Messaggio: ' + err.message
             };
         }
 
@@ -83,7 +83,7 @@ const ResetWineNumberIntentHandler = {
 
         var speechText = ''
         if (spot != undefined) {
-            speechText = 'Closing spot 1';
+            speechText = 'Chiusura della posizione ' + spot;
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -97,11 +97,11 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error while closing spot ' + spot + '. Message: ' + err.message
+                speechText = 'Errore in chiusura della posizione ' + spot + '. Messaggio: ' + err.message
             };
 
         } else {
-            speechText = 'Closing spot ' + spot;
+            speechText = 'Chiusura della posizione ' + spot;
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
@@ -115,7 +115,7 @@ const ResetWineNumberIntentHandler = {
                 }).promise();
 
             } catch (err) {
-                speechText = 'Error while closing spot 1. Message: ' + err.message
+                speechText = 'Errore in chiusura della posizione 1. Messaggio: ' + err.message
             };
 
         }
@@ -205,10 +205,10 @@ const ResetAllWinesHandler = {
                     UpdateExpression: "set wineid = :winetoclose",
                 }).promise();
             //}
-            speechText = 'Closing all spots';
+            speechText = 'Ritorno alla home';
 
         } catch (err) {
-            speechText = 'Error while closing all spots. Message: ' + err.message;
+            speechText = 'Errore in chiusura di tutte le posizioni. Messaggio: ' + err.message;
         };
 
         return handlerInput.responseBuilder
@@ -224,8 +224,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Chooose a wine to explore! Try to say: Show me wine number 1 in spot 1. ' +
-            'If you do not request a spot, the first will be default.';
+        const speakOutput = 'Scegli un vino da esplorare! Prova a chiedermi: mostrami il vino numero 1 in posizione 1. Se ometti la posizione, il vino verrà aperto sulla prima di default.';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -241,7 +240,7 @@ const ErrorHandler = {
     handle(handlerInput, error) {
         console.log('Error handled: ' + JSON.stringify(error.message));
 
-        const speechText = 'Error encountered: ' + error.message;
+        const speechText = 'Errore: ' + error.message;
         return handlerInput.responseBuilder
             .speak(speechText)
             .withShouldEndSession(false)
@@ -256,7 +255,7 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const speakOutput = 'Alla prossima!';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
