@@ -73,6 +73,30 @@ const ShowWineNumberIntentHandler = {
     }
 };
 
+const ShowWineNameIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'ShowWineNameIntent';
+    },
+    handle(handlerInput) {
+        const name = Alexa.getSlotValue(handlerInput.requestEnvelope, 'name');
+        const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
+
+        var speechText = '';
+
+        if(spot!=undefined) {
+            speechText = 'Vino ' + name + ' in posizione ' + spot;
+        } else {
+            speechText = 'Vino ' + name + ' in posizione 1';
+        }
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withShouldEndSession(false)
+            .getResponse();
+    }
+};
+
 const ResetWineNumberIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -138,72 +162,72 @@ const ResetAllWinesIntentHandler = {
 
         try {
             //for(var spot = 1; spot++; spot<6) {
-                let data1 = await ddb.update({
-                    TableName: "AromaticWines",
-                    Key: {
-                        spotid: 1
-                    },
-                    ExpressionAttributeValues: {
-                        ':winetoclose': 0,
-                    },
-                    UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+            let data1 = await ddb.update({
+                TableName: "AromaticWines",
+                Key: {
+                    spotid: 1
+                },
+                ExpressionAttributeValues: {
+                    ':winetoclose': 0,
+                },
+                UpdateExpression: "set wineid = :winetoclose",
+            }).promise();
             //}
 
-                let data2 = await ddb.update({
-                    TableName: "AromaticWines",
-                    Key: {
-                        spotid: 2
-                    },
-                    ExpressionAttributeValues: {
-                        ':winetoclose': 0,
-                    },
-                    UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+            let data2 = await ddb.update({
+                TableName: "AromaticWines",
+                Key: {
+                    spotid: 2
+                },
+                ExpressionAttributeValues: {
+                    ':winetoclose': 0,
+                },
+                UpdateExpression: "set wineid = :winetoclose",
+            }).promise();
 
-                let data3 = await ddb.update({
-                    TableName: "AromaticWines",
-                    Key: {
-                        spotid: 3
-                    },
-                    ExpressionAttributeValues: {
-                        ':winetoclose': 0,
-                    },
-                    UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+            let data3 = await ddb.update({
+                TableName: "AromaticWines",
+                Key: {
+                    spotid: 3
+                },
+                ExpressionAttributeValues: {
+                    ':winetoclose': 0,
+                },
+                UpdateExpression: "set wineid = :winetoclose",
+            }).promise();
 
-                let data4 = await ddb.update({
-                    TableName: "AromaticWines",
-                    Key: {
-                        spotid: 4
-                    },
-                    ExpressionAttributeValues: {
-                        ':winetoclose': 0,
-                    },
-                    UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+            let data4 = await ddb.update({
+                TableName: "AromaticWines",
+                Key: {
+                    spotid: 4
+                },
+                ExpressionAttributeValues: {
+                    ':winetoclose': 0,
+                },
+                UpdateExpression: "set wineid = :winetoclose",
+            }).promise();
 
-                let data5 = await ddb.update({
-                    TableName: "AromaticWines",
-                    Key: {
-                        spotid: 5
-                    },
-                    ExpressionAttributeValues: {
-                        ':winetoclose': 0,
-                    },
-                    UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+            let data5 = await ddb.update({
+                TableName: "AromaticWines",
+                Key: {
+                    spotid: 5
+                },
+                ExpressionAttributeValues: {
+                    ':winetoclose': 0,
+                },
+                UpdateExpression: "set wineid = :winetoclose",
+            }).promise();
 
-                let data6 = await ddb.update({
-                    TableName: "AromaticWines",
-                    Key: {
-                        spotid: 6
-                    },
-                    ExpressionAttributeValues: {
-                        ':winetoclose': 0,
-                    },
-                    UpdateExpression: "set wineid = :winetoclose",
-                }).promise();
+            let data6 = await ddb.update({
+                TableName: "AromaticWines",
+                Key: {
+                    spotid: 6
+                },
+                ExpressionAttributeValues: {
+                    ':winetoclose': 0,
+                },
+                UpdateExpression: "set wineid = :winetoclose",
+            }).promise();
             //}
             speechText = 'Ritorno alla home';
 
@@ -272,7 +296,8 @@ exports.handler = async function (event, context) {
                 LaunchRequestHandler,
                 ShowWineNumberIntentHandler,
                 ResetWineNumberIntentHandler,
-                ResetAllWinesIntentHandler
+                ResetAllWinesIntentHandler,
+                ShowWineNameIntentHandler
             ).create();
     }
 
