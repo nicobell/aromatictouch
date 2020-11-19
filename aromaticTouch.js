@@ -146,9 +146,10 @@ const ResetWineNumberIntentHandler = {
                         spotid: parseInt(spot)
                     },
                     ExpressionAttributeValues: {
-                        ':winetoclose': 0
+                        ':winetoclose': 0,
+                        ':wineclosed': ""
                     },
-                    UpdateExpression: "set wineid = :winetoclose"
+                    UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed"
                 }).promise();
 
             } catch (err) {
@@ -164,9 +165,10 @@ const ResetWineNumberIntentHandler = {
                         spotid: 1
                     },
                     ExpressionAttributeValues: {
-                        ':winetoclose': 0
+                        ':winetoclose': 0,
+                        ":wineclosed": ""
                     },
-                    UpdateExpression: "set wineid = :winetoclose"
+                    UpdateExpression: "set wineid = :winetoclose, winename = :wineclosed"
                 }).promise();
 
             } catch (err) {
