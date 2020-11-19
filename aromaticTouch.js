@@ -101,7 +101,7 @@ const ResetWineNumberIntentHandler = {
             };
 
         } else {
-            speechText = 'Chiusura della posizione ' + spot;
+            speechText = 'Chiusura della posizione 1';
             try {
                 let data = await ddb.update({
                     TableName: "AromaticWines",
