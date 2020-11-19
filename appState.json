@@ -11,8 +11,8 @@
         "isRemovable": true,
         "filePath": "aromaticTouch.js",
         "cursor": {
-          "lineNumber": 300,
-          "column": 42
+          "lineNumber": 103,
+          "column": 15
         },
         "config": {
           "runtime": "nodejs10.x",
@@ -110,7 +110,7 @@
     "platform": "AWS",
     "language": "nodejs",
     "platformRegions": {},
-    "lastSave": 1605782451335
+    "lastSave": 1605784109066
   },
   "VCS_STATE": {
     "provider": "GitHub",

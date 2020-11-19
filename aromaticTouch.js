@@ -78,7 +78,7 @@ const ShowWineNameIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'ShowWineNameIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         const name = Alexa.getSlotValue(handlerInput.requestEnvelope, 'name');
         const spot = Alexa.getSlotValue(handlerInput.requestEnvelope, 'spot');
 
@@ -86,8 +86,39 @@ const ShowWineNameIntentHandler = {
 
         if(spot!=undefined) {
             speechText = 'Vino ' + name + ' in posizione ' + spot;
+
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: parseInt(spot)
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoshow': name
+                    },
+                    UpdateExpression: "set winename = :winetoshow"
+                }).promise();
+            } catch (err) {
+                speechText = 'Errore in apertura del vino in posizione ' + spot + '. Messaggio: ' + err.message
+            };
+
         } else {
             speechText = 'Vino ' + name + ' in posizione 1';
+
+            try {
+                let data = await ddb.update({
+                    TableName: "AromaticWines",
+                    Key: {
+                        spotid: 1
+                    },
+                    ExpressionAttributeValues: {
+                        ':winetoshow': name
+                    },
+                    UpdateExpression: "set winename = :winetoshow"
+                }).promise();
+            } catch (err) {
+                speechText = 'Errore in apertura del vino in posizione ' + spot + '. Messaggio: ' + err.message
+            };
         }
 
         return handlerInput.responseBuilder
