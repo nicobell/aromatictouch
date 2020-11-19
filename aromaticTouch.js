@@ -127,10 +127,10 @@ const ResetWineNumberIntentHandler = {
     }
 };
 
-const ResetAllWinesHandler = {
+const ResetAllWinesIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWines';
+            && handlerInput.requestEnvelope.request.intent.name === 'ResetAllWinesIntent';
     },
     async handle(handlerInput) {
         var speechText = '';
@@ -272,7 +272,7 @@ exports.handler = async function (event, context) {
                 LaunchRequestHandler,
                 ShowWineNumberIntentHandler,
                 ResetWineNumberIntentHandler,
-                ResetAllWinesHandler
+                ResetAllWinesIntentHandler
             ).create();
     }
 
